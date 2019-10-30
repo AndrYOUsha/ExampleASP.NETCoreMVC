@@ -1,0 +1,63 @@
+﻿@model WebApplication3.Models.MovieViewModels.MoviesIndexData
+
+@{
+    ViewData["Title"] = "Actors";
+}
+
+<div class="container">
+    <h1 class="display-4">Actors page</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Actors.Single().ActorId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Actors.Single().FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Actors.Single().LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Movies.Single().Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Movies.Single().ReleaseDate)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Actors)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActorId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @{
+                        foreach (var movie in item.MovieActors)
+                        {
+                            @movie.Movie.Title <br/>
+                        }
+                    }
+                </td>
+                <td>
+                    @{ 
+                        foreach(var movie in item.MovieActors)
+                        {
+                            @movie.Movie.ReleaseDate.Year <br />
+                        }
+                    }
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
